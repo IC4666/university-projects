@@ -1,18 +1,30 @@
 import 'package:flutter/material.dart';
 import 'signup_screen.dart';
+import 'home_screen.dart'; // ⬅️ Make sure you import your HomePage screen
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text('Login')),
       appBar: AppBar(
-        backgroundColor:  const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         toolbarHeight: 150.0,
         title: Center(
           child: Column(
@@ -32,7 +44,6 @@ class LoginScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 22,
                   color: Color.fromARGB(255, 0, 0, 0),
-                  // backgroundColor: Color.fromARGB(255, 231, 0, 0),
                 ),
               ),
             ],
@@ -44,10 +55,10 @@ class LoginScreen extends StatelessWidget {
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(30.0),
-          width: 400, 
+          width: 400,
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 255, 255), // light gray
-            borderRadius: BorderRadius.circular(20), 
+            color: const Color.fromARGB(255, 255, 255, 255),
+            borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
                 color: Colors.black12,
@@ -72,13 +83,16 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  //Implement login with backend 
+                  // You can add real validation here
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
                 },
                 child: const Text('Login'),
               ),
               TextButton(
                 onPressed: () {
-                  
                   Navigator.push(
                     context,
                     MaterialPageRoute(
